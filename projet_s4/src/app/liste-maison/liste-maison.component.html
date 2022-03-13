@@ -1,0 +1,23 @@
+<!-- AFFICHAGE LISTE DES MAISONS-->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Liste des maisons : </h2>
+      <div *ngif="error">{{error}}</div>
+      <div *ngIf="success">{{success}}</div>
+
+      <div *ngFor="let maison of maisons">
+        <img src="{{maison.url}}" style = "height:200px; width:300px;"/>
+
+        <h6>surface habitable : {{maison.surface_hab}} m2</h6>
+        <h6> Prix : {{maison.prix}} €</h6>
+
+        <p>{{maison.description}}</p>
+        <p *ngIf="maison.voisinage==0">Aucun voisinage pour ce bien.</p>
+        <p *ngIf="maison.voisinage==1">Voisinage à proximité pour ce bien</p>
+
+      </div>
+    </div>
+  </div>
+  <button type = "button" class = "">testdubouton</button>
+</div>
