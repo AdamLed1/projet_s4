@@ -1,0 +1,85 @@
+
+<div class="container-fluid" *ngIf="connecte.valueOf() == false">
+  <h2>Connexion</h2>
+  <form (ngSubmit)="connexionUtilisateur(f)" #f="ngForm">
+    <div class="form-group">
+      <label for="login">
+        Login
+      </label>
+      <input type="text" id="login" class="form-control" name="login" [(ngModel)]="utilisateur.login" style="width: 25%;" ngModel required>
+    </div>
+    <div class="form-group">
+      <label for="mdp">
+        Mot de passe
+      </label>
+      <input type="password" id="mdp" class="form-control" name="mdp" [(ngModel)]="utilisateur.mdp" style="width: 25%;" ngModel required>
+
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Connexion</button>
+
+    <!--<button type="submit" class="btn btn-primary" [disabled]="f.invalid">Connexion</button>-->
+
+  </form>
+</div>
+
+<div class="container-fluid" *ngIf="connecte.valueOf() == true">
+  <h2 class="h2">Vous êtes connecté</h2>
+
+  <div class="container-fluid">
+    <h2>Ajout d'un bien</h2>
+    <form (ngSubmit)="ajoutMaison(f)" #f="ngForm">
+      <div class="form-group">
+        <label for="desc">
+          Description
+        </label>
+        <input type="text" id="desc" class="form-control" name="desc" [(ngModel)]="maison.description" style="width: 25%;" ngModel required>
+      </div>
+      <div class="form-group">
+        <label for="url">
+          URL Image
+        </label>
+        <input type="text" id="url" class="form-control" name="url" [(ngModel)]="maison.url" style="width: 25%;" ngModel required>
+      </div>
+      <div class="form-group">
+        <label for="surf_hab">
+          Surface habitable
+        </label>
+        <input type="number" id="surf_hab" class="form-control" name="surf_hab" [(ngModel)]="maison.surface_hab" style="width: 25%;" ngModel required>
+      </div>
+      <div class="form-group">
+        <label for="surf_jard">
+          Surface du jardin
+        </label>
+        <input type="text" id="surf_jard" class="form-control" name="surf_jard" [(ngModel)]="maison.surface_jardin" style="width: 25%;" ngModel required>
+      </div>
+      <div class="form-group">
+        <label for="prix">
+          Prix
+        </label>
+        <input type="number" id="prix" class="form-control" name="prix" [(ngModel)]="maison.prix" style="width: 25%;" ngModel required>
+      </div>
+      <div class="form-group">
+        <label for="voisin">
+          Voisinage
+        </label>
+        <input type="number" id="voisin" class="form-control" name="voisin" [(ngModel)]="maison.voisinage" style="width: 25%;" ngModel required>
+      </div>
+      <div class="form-group">
+        <label for="id_comm">
+          ID de la commune
+        </label>
+        <input type="number" id="id_comm" class="form-control" name="id_comm" [(ngModel)]="maison.id_commune" style="width: 25%;" ngModel required>
+      </div>
+      <div class="form-group">
+        <label for="id_cat">
+          ID de la catégorie de bien
+        </label>
+        <input type="number" id="id_cat" class="form-control" name="id_cat" [(ngModel)]="maison.id_cat" style="width: 25%;" ngModel required>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Ajouter</button>
+
+    </form>
+  </div>
+
+  <button class="btn btn-primary" (click)="deconnexion()">Se déconnecter</button>
+</div>

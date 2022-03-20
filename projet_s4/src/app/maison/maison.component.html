@@ -1,0 +1,21 @@
+<h1 class="h1">Dans le component maison</h1>
+
+<div *ngFor="let maison of maisons" class="col-md-2">
+  <img class="card-img-top" src="{{maison.url}}" style = "height:200px; width:300px;"/>
+
+  <h6 class="card-title">Surface habitable : {{maison.surface_hab}} m2</h6>
+  <h6 class="card-title"> Prix : {{maison.prix}} €</h6>
+  <p>bien numéro {{maison.id_maison}}</p>
+  <p class="card-text">{{maison.description}}</p>
+
+  <p>Ce bien est un T{{maison.id_cat}}.</p>
+
+  <p *ngIf="maison.surface_jardin == 0">Pas de jardin pour ce bien.</p>
+  <p *ngIf="maison.surface_jardin > 0">surface du jardin : {{maison.surface_jardin}} m2</p>
+
+  <p *ngIf="maison.voisinage==0">Aucun voisinage pour ce bien.</p>
+  <p *ngIf="maison.voisinage==1">Voisinage à proximité pour ce bien</p>
+
+</div>
+<a routerLink="/liste">Vers la liste</a>
+<a routerLink="/recherche">Vers la recherche</a>

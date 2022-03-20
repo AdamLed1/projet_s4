@@ -11,7 +11,7 @@ import {NgForm} from "@angular/forms";
 export class ListeMaisonComponent implements OnInit {
 
   maisons: Maison[] = [];
-  maison: Maison = {surface_hab:0, surface_jardin:0, prix:0, description:"", url:"", voisinage:0};
+  maison: Maison = {surface_hab:0, surface_jardin:0, prix:0, description:"", url:"", voisinage:0, id_commune:0, id_cat:0, id_maison:0};
   error = '';
   success = '';
 
@@ -20,20 +20,6 @@ export class ListeMaisonComponent implements OnInit {
 
   ngOnInit() {
     this.getMaisons();
-  }
-
-  addMaison(f: NgForm) {
-
-    this.maisonService.store(this.maison).subscribe(
-      (res: Maison) => {
-        this.maisons.push(res)
-
-        this.success = 'creation reussie';
-
-        f.reset();
-      },
-      (err) => (this.error = err.message)
-    );
   }
 
   getMaisons(): void {

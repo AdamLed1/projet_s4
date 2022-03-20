@@ -3,6 +3,7 @@ import { HttpClient} from '@angular/common/http';
 
 import { map } from 'rxjs/operators';
 import { Maison } from '../maison';
+import {Recherche} from "../recherche";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,22 @@ export class MaisonService {
   constructor(private http: HttpClient) {
   }
 
+  getById(id_maison : number) {
+    return this.http.post(`${this.baseUrl}/element.php`, { data: id_maison}).pipe(
+      map((res: any) => {
+        return res['data'];
+      })
+    );
+  }
 
-//`${this.baseUrl}/list`
+  getResearch(recherche: Recherche) {
+    return this.http.post(`${this.baseUrl}/list.php`, {data: recherche}).pipe(
+      map((res: any) => {
+        return res['data'];
+      })
+    );
+  }
+
 
   getAll() {
     return this.http.get(`${this.baseUrl}/list.php`).pipe(
@@ -25,8 +40,8 @@ export class MaisonService {
     );
   }
 
-  store(maison : Maison) {
-    return this.http.post(`${this.baseUrl}/store.php`, { data: maison}).pipe(
+  add(maison : Maison) {
+    return this.http.post(`${this.baseUrl}/insertion.php`, { data: maison}).pipe(
       map((res: any) => {
         return res['data'];
       })

@@ -5,4 +5,7 @@ export interface Maison {
   description: string;
   url: string;
   voisinage: number;
+  id_commune: number;
+  id_cat: number;
+  id_maison: number;
 }
