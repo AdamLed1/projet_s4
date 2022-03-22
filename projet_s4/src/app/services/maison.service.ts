@@ -10,6 +10,7 @@ import {Recherche} from "../recherche";
 })
 export class MaisonService {
 
+  // CHEMIN VERS LE SERVEUR LOCAL
   baseUrl = 'http://localhost/api';
 
   constructor(private http: HttpClient) {

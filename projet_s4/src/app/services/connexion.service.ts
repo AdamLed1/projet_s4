@@ -11,6 +11,7 @@ import {Utilisateur} from "../utilisateur";
 
 export class ConnexionService {
 
+  // CHEMIN VERS LE SERVEUR LOCAL
   baseUrl = 'http://localhost/api';
 
   constructor(private http: HttpClient) {
@@ -18,9 +19,8 @@ export class ConnexionService {
 
 
   verifConnexion(utilisateur: Utilisateur) {
-    console.log("en bas");
+
     console.log(utilisateur);
-    console.log("en haut");
     return this.http.post(`${this.baseUrl}/authentification.php`, { data: utilisateur}).pipe(
       map((res: any) => {
         return res['data'];

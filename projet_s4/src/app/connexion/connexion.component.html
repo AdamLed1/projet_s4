@@ -1,4 +1,4 @@
-
+<!-- FORMULAIRE DE CONNEXION -->
 <div class="container-fluid" *ngIf="connecte.valueOf() == false">
   <h2>Connexion</h2>
   <form (ngSubmit)="connexionUtilisateur(f)" #f="ngForm">
@@ -22,6 +22,7 @@
   </form>
 </div>
 
+<!-- FORMULAIRE D'AJOUT DE MAISONS -->
 <div class="container-fluid" *ngIf="connecte.valueOf() == true">
   <h2 class="h2">Vous êtes connecté</h2>
 
@@ -59,10 +60,18 @@
         <input type="number" id="prix" class="form-control" name="prix" [(ngModel)]="maison.prix" style="width: 25%;" ngModel required>
       </div>
       <div class="form-group">
-        <label for="voisin">
-          Voisinage
-        </label>
-        <input type="number" id="voisin" class="form-control" name="voisin" [(ngModel)]="maison.voisinage" style="width: 25%;" ngModel required>
+        <div>
+          <input type="radio" id="sans_voisin" value=0 name="voisin" [(ngModel)]="maison.voisinage" checked>
+          <label for="sans_voisin">
+            Sans voisins
+          </label>
+        </div>
+        <div>
+          <input type="radio" id="avec_voisin" value=1 name="voisin" [(ngModel)]="maison.voisinage">
+          <label for="avec_voisin">
+            Voisins
+          </label>
+        </div>
       </div>
       <div class="form-group">
         <label for="id_comm">
@@ -82,4 +91,21 @@
   </div>
 
   <button class="btn btn-primary" (click)="deconnexion()">Se déconnecter</button>
+</div>
+
+<!-- AFFICHAGE DES MAISONS AJOUTEES-->
+<div class="container-fluid" *ngIf="maisons != []">
+  <div class="row">
+    <div class="container-fluid">
+      <div *ngif="error">{{error}}</div>
+      <div *ngIf="success">{{success}}</div>
+
+      <div *ngFor="let maison of maisons" class="col-md-3 maisons">
+        <img class="card-img-top" src="{{maison.url}}" alt="image de la maison" style = "height:200px; width:300px; border-radius: 5px;"/>
+
+        <h6 class="card-title"> Prix : {{maison.prix}} €</h6>
+        <p class="card-text">{{maison.description}}</p>
+      </div>
+    </div>
+  </div>
 </div>

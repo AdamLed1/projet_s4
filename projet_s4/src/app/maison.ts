@@ -1,3 +1,4 @@
+// TYPE MAISON
 export interface Maison {
   surface_hab : number;
   surface_jardin : number;

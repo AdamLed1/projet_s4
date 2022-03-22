@@ -15,6 +15,7 @@ import { ConnexionService } from "./services/connexion.service";
 import { MaisonComponent } from './maison/maison.component';
 import { RechercheComponent } from './recherche/recherche.component';
 
+// ROUTES ET LEURS COMPONENTS
 const appRoutes: Routes = [
   { path: 'liste', component: ListeMaisonComponent },
   { path: 'accueil', component: AccueilComponent },

@@ -17,7 +17,7 @@ export class RechercheComponent implements OnInit {
   success = ''
 
   maisons : Maison[] = [];
-  recherche : Recherche = {nb_pieces: 0, surface_hab_min: 0, surface_jard_min: 0, ville: 0, voisinage: 2, prix_max: 0};
+  recherche : Recherche = {nb_pieces: 0, surface_hab_min: 0, surface_jard_min: 0, ville: "0", voisinage: "2", prix_max: 0};
 
 
   ngOnInit(): void {
@@ -33,13 +33,12 @@ export class RechercheComponent implements OnInit {
       (data: Maison[]) => {
         this.maisons = data;
 
-        this.success = 'recherche réussie';
-
-        form.reset();
+        this.success = 'résultats trouvés :';
 
       },
       (err) => (this.error = err.message)
     );
+    console.log("erreur : " + this.error);
 
   }
 
