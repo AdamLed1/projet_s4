@@ -1,0 +1,69 @@
+<?php
+
+/**
+ * Retourne la liste des maisons
+ */
+require 'connect.php';
+
+// Récupération de l'ID de la maison
+
+$postdata = file_get_contents("php://input");
+
+if (isset($postdata) && !empty($postdata)) {
+				
+	$requete = json_decode($postdata);
+	
+	$nb_pieces = htmlspecialchars($requete->data->nb_pieces);
+	$pieces = "";
+	$surface_hab_min = htmlspecialchars($requete->data->surface_hab_min);
+	$surface_h_min = "";
+	$surface_jard_min = htmlspecialchars($requete->data->surface_jard_min);
+	$surface_j_min = "";
+	$ville = htmlspecialchars($requete->data->ville);
+	$vil = "";
+	$voisinage = htmlspecialchars($requete->data->voisinage);
+	$voisins = "";
+	$prix_max = htmlspecialchars($requete->data->prix_max);
+	$p_max = "";
+	
+	if (nb_pieces != 0) {
+		
+	}	
+	
+	
+	$sql = "SELECT id_maison, surface_hab, surface_jardin, prix, description, url, voisinage, id_commune, id_cat FROM maison";
+	
+	$select = $con_db->prepare($sql);
+	
+	
+	
+}
+
+    
+$maisons = [];
+
+$select = $con_db->prepare("SELECT id_maison, surface_hab, surface_jardin, prix, description, url, voisinage, id_commune, id_cat FROM maison");
+$select->execute();
+
+$cpt = 0;
+
+// Récupération et stockage des données de la B.D.
+
+while($ligne = $select->fetch()) {
+	  
+  $maisons[$cpt]['id_maison'] = $ligne['id_maison'];
+  $maisons[$cpt]['surface_hab'] = $ligne['surface_hab'];
+  $maisons[$cpt]['surface_jardin'] = $ligne['surface_jardin'];
+  $maisons[$cpt]['prix'] = $ligne['prix'];
+  $maisons[$cpt]['description'] = $ligne['description'];
+  $maisons[$cpt]['voisinage'] = $ligne['voisinage'];
+  $maisons[$cpt]['url'] = $ligne['url'];
+  $maisons[$cpt]['id_commune'] = $ligne['id_commune'];
+  $maisons[$cpt]['id_cat'] = $ligne['id_cat'];
+
+  $cpt++;
+} 
+    
+	echo json_encode(['data'=>$maisons]);
+
+?>
