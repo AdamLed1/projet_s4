@@ -1,0 +1,16 @@
+/* FEUILLE DE STYLE POUR LE COMPONENT CONNEXION */
+
+.maisons {
+
+  background-color: #DCDCDC;
+  border : 1px solid black;
+  border-radius: 10px;
+  margin: 15px;
+  padding : 20px;
+  width: 345px;
+
+}
+
+.div_liste {
+  width: 83%;
+}

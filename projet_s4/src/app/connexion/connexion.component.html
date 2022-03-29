@@ -1,5 +1,5 @@
 <!-- FORMULAIRE DE CONNEXION -->
-<div class="container-fluid" *ngIf="connecte.valueOf() == false">
+<div class="container" *ngIf="connecte.valueOf() == false">
   <h2>Connexion</h2>
   <form (ngSubmit)="connexionUtilisateur(f)" #f="ngForm">
     <div class="form-group">
@@ -17,16 +17,14 @@
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Connexion</button>
 
-    <!--<button type="submit" class="btn btn-primary" [disabled]="f.invalid">Connexion</button>-->
-
   </form>
 </div>
 
 <!-- FORMULAIRE D'AJOUT DE MAISONS -->
-<div class="container-fluid" *ngIf="connecte.valueOf() == true">
+<div class="container" *ngIf="connecte.valueOf() == true">
   <h2 class="h2">Vous êtes connecté</h2>
 
-  <div class="container-fluid">
+  <div class="container">
     <h2>Ajout d'un bien</h2>
     <form (ngSubmit)="ajoutMaison(f)" #f="ngForm">
       <div class="form-group">
@@ -93,19 +91,78 @@
   <button class="btn btn-primary" (click)="deconnexion()">Se déconnecter</button>
 </div>
 
-<!-- AFFICHAGE DES MAISONS AJOUTEES-->
-<div class="container-fluid" *ngIf="maisons != []">
-  <div class="row">
-    <div class="container-fluid">
-      <div *ngif="error">{{error}}</div>
-      <div *ngIf="success">{{success}}</div>
+<!-- AFFICHAGE DES BIENS AVEC BOUTON SUPPRESSION -->
+<div class="container div_liste" *ngIf="connecte.valueOf() == true">
+  <div *ngFor="let maison of maisons" class="col-md-3 maisons">
+    <img class="card-img-top" src="{{maison.url}}" alt="image de la maison" style = "height:200px; width:300px; border-radius: 5px;"/>
 
-      <div *ngFor="let maison of maisons" class="col-md-3 maisons">
-        <img class="card-img-top" src="{{maison.url}}" alt="image de la maison" style = "height:200px; width:300px; border-radius: 5px;"/>
+    <h6 class="card-title"> Prix : {{maison.prix}} €</h6>
+    <p class="card-text">{{maison.description}}</p>
 
-        <h6 class="card-title"> Prix : {{maison.prix}} €</h6>
-        <p class="card-text">{{maison.description}}</p>
+    <button class="btn btn-danger" (click)="supprimerMaison(maison.id_maison)">Supprimer le bien</button>
+    <button class="btn btn-warning" (click)="mettreAJourMaison(maison.id_maison)">Mettre à jour le bien</button>
+  </div>
+</div>
+<div class="container" *ngIf="maison.prix != 0">
+  <h2>Mise à jour d'un bien</h2>
+  <form (ngSubmit)="envoiMiseAJour(formUpdate)" #formUpdate="ngForm">
+    <div class="form-group">
+      <label for="id_maison">
+        ID maison
+      </label>
+      <input type="number" id="id_maison" class="form-control" name="idMaison" [(ngModel)]="maison.id_maison" style="width: 25%;" ngModel required>
+    </div>
+    <div class="form-group">
+      <label for="descUp">
+        Description
+      </label>
+      <input type="text" id="descUp" class="form-control" name="desc" [(ngModel)]="maison.description" style="width: 25%;" ngModel required>
+    </div>
+    <div class="form-group">
+      <label for="urlUp">
+        URL Image
+      </label>
+      <input type="text" id="urlUp" class="form-control" name="url" [(ngModel)]="maison.url" style="width: 25%;" ngModel required>
+    </div>
+    <div class="form-group">
+      <label for="surf_habUp">
+        Surface habitable
+      </label>
+      <input type="number" id="surf_habUp" class="form-control" name="surf_hab" [(ngModel)]="maison.surface_hab" style="width: 25%;" ngModel required>
+    </div>
+    <div class="form-group">
+      <label for="surf_jardUp">
+        Surface du jardin
+      </label>
+      <input type="text" id="surf_jardUp" class="form-control" name="surf_jard" [(ngModel)]="maison.surface_jardin" style="width: 25%;" ngModel required>
+    </div>
+    <div class="form-group">
+      <label for="prixUp">
+        Prix
+      </label>
+      <input type="number" id="prixUp" class="form-control" name="prix" [(ngModel)]="maison.prix" style="width: 25%;" ngModel required>
+    </div>
+    <div class="form-group">
+      <div>
+        <label for="voisinUp">
+          Voisins
+        </label>
+        <input type="number" id="voisinUp" value=1 name="voisin" [(ngModel)]="maison.voisinage">
       </div>
     </div>
-  </div>
+    <div class="form-group">
+      <label for="id_commUp">
+        ID de la commune
+      </label>
+      <input type="number" id="id_commUp" class="form-control" name="id_comm" [(ngModel)]="maison.id_commune" style="width: 25%;" ngModel required>
+    </div>
+    <div class="form-group">
+      <label for="id_catUp">
+        ID de la catégorie de bien
+      </label>
+      <input type="number" id="id_catUp" class="form-control" name="id_cat" [(ngModel)]="maison.id_cat" style="width: 25%;" ngModel required>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="formUpdate.invalid">Mettre à jour</button>
+
+  </form>
 </div>

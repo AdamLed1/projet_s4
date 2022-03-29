@@ -1,0 +1,13 @@
+/* FEUILLE DE STYLE POUR LE COMPONENT MAISON-COMPONENT */
+
+.div_maison {
+  background-color: whitesmoke;
+  border-radius: 5px;
+  border: 1px gray solid;
+
+}
+
+.liens {
+  display: block;
+  color: black;
+}

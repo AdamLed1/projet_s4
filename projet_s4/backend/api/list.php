@@ -136,7 +136,7 @@ if (isset($postdata) && !empty($postdata)) {
 	
 	
 } else {
-	// Si aucune données n'est reçues par post, passage dans le else
+	// Si aucune donnée n'est reçue par post, passage dans le else
 
 	// Envoi de la requête de base
 
@@ -165,31 +165,4 @@ if (isset($postdata) && !empty($postdata)) {
 	echo json_encode(['data'=>$maisons]);
 }
 
-    
-/*$maisons = [];
-
-$select = $con_db->prepare("SELECT id_maison, surface_hab, surface_jardin, prix, description, url, voisinage, id_commune, id_cat FROM maison");
-$select->execute();
-
-$cpt = 0;
-
-// Récupération et stockage des données de la B.D.
-
-while($ligne = $select->fetch()) {
-	  
-  $maisons[$cpt]['id_maison'] = $ligne['id_maison'];
-  $maisons[$cpt]['surface_hab'] = $ligne['surface_hab'];
-  $maisons[$cpt]['surface_jardin'] = $ligne['surface_jardin'];
-  $maisons[$cpt]['prix'] = $ligne['prix'];
-  $maisons[$cpt]['description'] = $ligne['description'];
-  $maisons[$cpt]['voisinage'] = $ligne['voisinage'];
-  $maisons[$cpt]['url'] = $ligne['url'];
-  $maisons[$cpt]['id_commune'] = $ligne['id_commune'];
-  $maisons[$cpt]['id_cat'] = $ligne['id_cat'];
-
-  $cpt++;
-} 
-    
-	echo json_encode(['data'=>$maisons]);
-*/
 ?>

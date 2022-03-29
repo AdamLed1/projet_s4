@@ -1,22 +1,27 @@
-<h1 class="h1" style="margin-left: 5px;">Description du bien</h1>
-<!-- AFFICHAGE DU BIEN -->
-<div *ngFor="let maison of maisons" class="col-md-3" style="background: lightgray; border-radius: 5px;">
-  <img class="card-img-top" src="{{maison.url}}" style = "height:200px; width:300px; border-radius: 10px;"/>
+<div class="container">
+  <!-- AFFICHAGE DU BIEN -->
+  <div *ngFor="let maison of maisons" class="container div_maison">
+    <div class="container" style="text-align:center;">
+      <img src="{{maison.url}}" style = "height:200px; width:300px; border-radius: 10px;"/>
+    </div>
+    <div class="container">
+      <h4 class="text-center">Surface habitable : {{maison.surface_hab}} m2</h4>
+      <h4 class="text-center"> Prix : {{maison.prix}} €</h4>
+      <h4 class="text-center">bien numéro {{maison.id_maison}}</h4>
+      <h4 class="text-center">{{maison.description}}</h4>
 
-  <h4 class="text-center">Surface habitable : {{maison.surface_hab}} m2</h4>
-  <h4 class="text-center"> Prix : {{maison.prix}} €</h4>
-  <h4 class="text-center">bien numéro {{maison.id_maison}}</h4>
-  <h4 class="text-center">{{maison.description}}</h4>
+      <h4 class="text-center">Ce bien est un T{{maison.id_cat}}.</h4>
 
-  <h4 class="text-center">Ce bien est un T{{maison.id_cat}}.</h4>
+      <p *ngIf="maison.surface_jardin == 0" class="text-center">Pas de jardin pour ce bien.</p>
+      <h4 *ngIf="maison.surface_jardin > 0" class="text-center">surface du jardin : {{maison.surface_jardin}} m2</h4>
 
-  <p *ngIf="maison.surface_jardin == 0" class="text-center">Pas de jardin pour ce bien.</p>
-  <h4 *ngIf="maison.surface_jardin > 0" class="text-center">surface du jardin : {{maison.surface_jardin}} m2</h4>
-
-  <p *ngIf="maison.voisinage==0" class="text-center">Aucun voisinage pour ce bien.</p>
-  <p *ngIf="maison.voisinage==1" class="text-center">Voisinage à proximité pour ce bien</p>
-  <div>
-    <a routerLink="/liste" style="display: block; color: black;">Vers la liste</a>
-    <a routerLink="/recherche" style="display: block; color: black;">Vers la recherche</a>
+      <p *ngIf="maison.voisinage==0" class="text-center">Aucun voisinage pour ce bien.</p>
+      <p *ngIf="maison.voisinage==1" class="text-center">Voisinage à proximité pour ce bien</p>
+    </div>
+    <div>
+      <a routerLink="/liste" class="liens">Vers la liste</a>
+      <a routerLink="/recherche" class="liens">Vers la recherche</a>
+    </div>
   </div>
 </div>
+

@@ -10,8 +10,6 @@ import { AccueilComponent } from './accueil/accueil.component';
 import {RouterModule, Routes} from "@angular/router";
 import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 import { ConnexionComponent } from './connexion/connexion.component';
-import { MaisonService } from "./services/maison.service";
-import { ConnexionService } from "./services/connexion.service";
 import { MaisonComponent } from './maison/maison.component';
 import { RechercheComponent } from './recherche/recherche.component';
 

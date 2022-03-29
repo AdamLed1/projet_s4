@@ -3,10 +3,8 @@
 <!-- AFFICHAGE LISTE DES MAISONS-->
 <div class="container-fluid">
   <div class="row">
-    <div class="container-fluid">
-      <h2 class="h2">Liste des maisons :</h2>
-      <div *ngif="error">{{error}}</div>
-      <div *ngIf="success">{{success}}</div>
+    <div class="container div_liste">
+      <h2 class="h2 titre_liste">Liste des maisons :</h2>
 
       <div *ngFor="let maison of maisons" class="col-md-3 maisons">
         <img class="card-img-top" src="{{maison.url}}" alt="image de la maison" style = "height:200px; width:300px; border-radius: 5px;"/>
@@ -16,6 +14,71 @@
 
         <a [routerLink]="[maison.id_maison]" id="plus">Plus</a>
 
+        <button class="btn btn-primary" (click)="scoreMaison(maison.id_maison)">Ajouter au comparateur</button>
+      </div>
+
+      <div class="container-fluid">
+        <button class="btn btn-warning bouton_retirer" (click)="retirerDeLaComparaison()">Enlever de la comparaison</button>
+      </div>
+      <div class="container" *ngIf="comparaison.length < 2">
+        <p class="text-center">Pour lancer le comparateur, selectionner deux biens.</p>
+      </div>
+
+      <!-- PARTIE COMPARATEUR -->
+      <div class="container" *ngIf="this.comparaison.length == 2">
+        <p class="text-info">Comparateur prêt.</p>
+
+        <div class="container">
+          <label for="voisin">Privilégier les biens sans voisins</label>
+          <input type="radio" value=5 name="voisin" id="voisin" [(ngModel)]="this.preferences.voisins">Avec
+          <input type="radio" value=0 name="voisin" id="sansVoisin" [(ngModel)]="this.preferences.voisins">Sans
+        </div>
+
+        <div class="container">
+          <label for="surface_hab">Priviléger la surface habitable</label>
+          <input type="radio" value=5 name="surface_hab" id="surface_hab" [(ngModel)]="this.preferences.surface_h">Avec
+          <input type="radio" value=0 name="surface_hab" id="sansSurface_hab" [(ngModel)]="this.preferences.surface_h">Sans
+        </div>
+
+        <div class="container">
+          <label for="surface_jar">Priviléger la surface du jardin</label>
+          <input type="radio" value=5 name="surface_jar" id="surface_jar" [(ngModel)]="this.preferences.surface_j">Avec
+          <input type="radio" value=0 name="surface_jar" id="sansSurface_jar" [(ngModel)]="this.preferences.surface_j">Sans
+        </div>
+
+        <div class="container">
+          <label for="nb_pieces">Priviléger le nombre de pièces</label>
+          <input type="radio" value=5 name="nb_pieces" id="nb_pieces" [(ngModel)]="this.preferences.nb_pieces">Avec
+          <input type="radio" value=0 name="nb_pieces" id="sansNb_pieces" [(ngModel)]="this.preferences.nb_pieces">Sans
+        </div>
+
+        <div class="container">
+          <label for="prix">Priviléger le prix</label>
+          <input type="radio" value=5 name="prix" id="prix" [(ngModel)]="this.preferences.prix">Avec
+          <input type="radio" value=0 name="prix" id="sansPrix" [(ngModel)]="this.preferences.prix">Sans
+        </div>
+
+        <!-- RESULTAT DE LA COMPARAISON -->
+        <div>
+          <button class="btn btn-primary" (click)="calcul()">Lancer le comparateur</button>
+
+          <h5 class="h5" *ngIf="preferences.scoreMaison1 != 0">Score maison 1 : {{preferences.scoreMaison1}}</h5>
+          <h5 class="h5" *ngIf="preferences.scoreMaison2 != 0">Score maison 2 : {{preferences.scoreMaison2}}</h5>
+        </div>
+      </div>
+      <div *ngIf="preferences.scoreMaison1 != 0">
+        <div class="container" *ngFor="let maisonCompar of this.comparaison">
+
+          <img src="{{maisonCompar.url}}" style = "height:200px; width:300px; border-radius: 5px;">
+          <p class="text-info">Prix : {{maisonCompar.prix}} €</p>
+
+        </div>
+      </div>
+      <div class="container" *ngIf="this.comparaison.length == 2 && this.preferences.scoreMaison1 != 0">
+        <p class="text-info">Différence de prix :  la maison 1 affiche un prix {{preferences.deltaPrix}} % par rapport à la maison 2.</p>
+        <p class="text-info">Différence de surface habitable : la maison 1 a {{preferences.deltasurface_h}} % de surface par rapport à la maison 2.</p>
+        <p class="text-info">Différence de surface jardin : la maison 1 a {{preferences.deltasurface_j}} % de surface de jardin par rapport à la maison 2.</p>
+        <p class="text-info">Différence de nombre de pièces : la maison 1 a {{preferences.deltaNbPieces}} % de pièces par rapport à la maison 2.</p>
       </div>
     </div>
   </div>

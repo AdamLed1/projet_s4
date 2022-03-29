@@ -23,6 +23,7 @@ export class RechercheComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // FONCTION QUI ENVOI LES DONNEES NECESSAIRES A LA RECHERCHE DES BIENS PUIS LES RECEPTIONNES
   rechercherMaisons(form : NgForm) {
 
     this.maisons = [];
@@ -32,14 +33,21 @@ export class RechercheComponent implements OnInit {
     this.maisonService.getResearch(this.recherche).subscribe(
       (data: Maison[]) => {
         this.maisons = data;
+        this.supprimerParentheses();
 
         this.success = 'résultats trouvés :';
 
       },
       (err) => (this.error = err.message)
     );
-    console.log("erreur : " + this.error);
+  }
 
+  // SUPPRIMME LES PARENTHESES GENEREES PAR LE B.D.
+  supprimerParentheses() {
+    for (let i = 0; i < this.maisons.length; i++) {
+      this.maisons[i].url = this.maisons[i].url.slice(1, this.maisons[i].url.length-1);
+      this.maisons[i].description = this.maisons[i].description.slice(1, this.maisons[i].description.length-1);
+    }
   }
 
 

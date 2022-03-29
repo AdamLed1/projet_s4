@@ -2,7 +2,6 @@ import {Component, Injectable, OnInit} from '@angular/core';
 import {MaisonService} from "../services/maison.service";
 import {ActivatedRoute} from "@angular/router";
 import {Maison} from "../maison";
-import {ListeMaisonComponent} from "../liste-maison/liste-maison.component";
 
 @Injectable({
   providedIn: 'root'
@@ -21,17 +20,18 @@ export class MaisonComponent implements OnInit {
   success = '';
 
 
-  constructor(
-    private maisonService : MaisonService, private route : ActivatedRoute) { }
+  constructor(private maisonService : MaisonService, private route : ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getMaison();
   }
 
+  // RECEPTION DE LA MAISON
   getMaison() {
     this.maisonService.getById(this.route.snapshot.params['id']).subscribe(
       (data: Maison[]) => {
         this.maisons = data;
+        this.supprimerParentheses();
         this.success = '';
       },
       (err) => {
@@ -39,6 +39,12 @@ export class MaisonComponent implements OnInit {
         this.error = err;
       }
     );
+  }
+
+  // SUPPRESSION DES PARENTHESES GENEREES PAR LA B.D.
+  supprimerParentheses() {
+    this.maisons[0].url = this.maisons[0].url.slice(1, this.maisons[0].url.length-1);
+    this.maisons[0].description = this.maisons[0].description.slice(1, this.maisons[0].description.length-1);
   }
 
 

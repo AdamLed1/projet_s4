@@ -1,10 +1,11 @@
+/* FEUILLE DE STYLE POUR LE COMPONENT LISTE-MAISON */
+
 .maisons {
 
   background-color: #DCDCDC;
   border : 1px solid black;
   border-radius: 10px;
-  margin-left : 25px;
-  margin-top: 25px;
+  margin: 15px;
   padding : 20px;
   width: 345px;
 
@@ -18,4 +19,22 @@
   border : 1px black solid;
   margin-top: 5px;
 
+}
+
+.div_liste {
+
+  background-color: gainsboro;
+  border-radius: 5px;
+  width: 83%;
+
+}
+
+.titre_liste {
+  margin-left: 15px;
+}
+
+.bouton_retirer {
+  margin-top:15px;
+  margin-left: 8%;
+  margin-bottom: 10px;
 }
